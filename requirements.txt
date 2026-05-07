@@ -1,8 +1,9 @@
-fastapi
-uvicorn
-pymongo
-python-jose[cryptography]
-passlib[bcrypt]
-groq
-python-dotenv
-pydantic
+fastapi==0.104.1
+uvicorn==0.24.0
+pymongo==4.6.0
+python-jose[cryptography]==3.3.0
+passlib[bcrypt]==1.7.4
+groq==0.4.2
+python-dotenv==1.0.0
+pydantic==2.5.0
+bcrypt==4.0.1

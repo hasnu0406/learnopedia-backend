@@ -6,7 +6,7 @@ load_dotenv()
 
 GROQ_API_KEY = os.getenv("GROQ_API_KEY")
 if not GROQ_API_KEY:
-    raise ValueError("GROQ_API_KEY missing from .env file!")
+    raise ValueError("GROQ_API_KEY is missing from environment variables!")
 
 client = Groq(api_key=GROQ_API_KEY)
 
@@ -25,7 +25,7 @@ Please provide:
 3. Key skills they will gain
 4. Career outcomes they can expect
 
-Be warm, specific, and encouraging.
+Be warm, specific, and encouraging. Use clear headings and bullet points.
 """
     try:
         response = client.chat.completions.create(
@@ -35,4 +35,4 @@ Be warm, specific, and encouraging.
         )
         return response.choices[0].message.content
     except Exception as e:
-        raise Exception(f"Error code: {str(e)}")
+        raise Exception(f"AI error: {str(e)}")
