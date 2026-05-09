@@ -8,7 +8,7 @@ app = FastAPI(title="Learnopedia AI")
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
-    allow_credentials=False,
+    allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
@@ -18,4 +18,8 @@ app.include_router(recommend_router)
 
 @app.get("/")
 def home():
-    return {"message": "Welcome to Learnopedia AI"}
+    return {"message": "Learnopedia AI Backend is running!"}
+
+@app.get("/health")
+def health():
+    return {"status": "ok"}
