@@ -1,14 +1,14 @@
 import os
-from groq import Groq
+import requests
 from dotenv import load_dotenv
 
 load_dotenv()
 
-GROQ_API_KEY = os.getenv("GROQ_API_KEY")
-if not GROQ_API_KEY:
-    raise ValueError("GROQ_API_KEY is missing from environment variables!")
+OPENROUTER_API_KEY = os.getenv("OPENROUTER_API_KEY")
+if not OPENROUTER_API_KEY:
+    raise ValueError("OPENROUTER_API_KEY is missing from environment variables!")
 
-client = Groq(api_key=GROQ_API_KEY)
+OPENROUTER_API_URL = "https://openrouter.ai/api/v1/chat/completions"
 
 def get_recommendations(interests: list, skills: list, goals: list) -> str:
     prompt = f"""
@@ -28,11 +28,17 @@ Please provide:
 Be warm, specific, and encouraging. Use clear headings and bullet points.
 """
     try:
-        response = client.chat.completions.create(
-            model="llama-3.3-70b-versatile",
-            messages=[{"role": "user", "content": prompt}],
-            max_tokens=1500
-        )
-        return response.choices[0].message.content
+        headers = {
+            "Authorization": f"Bearer {OPENROUTER_API_KEY}",
+            "Content-Type": "application/json"
+        }
+        payload = {
+            "model": "meta-llama/llama-3-70b-instruct",
+            "messages": [{"role": "user", "content": prompt}],
+            "max_tokens": 1500
+        }
+        response = requests.post(OPENROUTER_API_URL, json=payload, headers=headers)
+        response.raise_for_status()
+        return response.json()["choices"][0]["message"]["content"]
     except Exception as e:
         raise Exception(f"AI error: {str(e)}")

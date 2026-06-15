@@ -2,7 +2,7 @@ from fastapi import APIRouter, HTTPException, Depends
 from fastapi.security import OAuth2PasswordBearer
 from pydantic import BaseModel
 from typing import List
-from app.services.groq_service import get_recommendations
+from ..services.groq_service import get_recommendations
 from jose import JWTError, jwt
 import os
 

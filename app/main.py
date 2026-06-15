@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from app.routes.auth import router as auth_router
-from app.routes.recommend import router as recommend_router
+from .routes.auth import router as auth_router
+from .routes.recommend import router as recommend_router
 
 app = FastAPI(title="Learnopedia AI")
 

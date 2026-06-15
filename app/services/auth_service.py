@@ -1,7 +1,7 @@
 from datetime import datetime, timedelta
 from jose import JWTError, jwt
 from passlib.context import CryptContext
-from app.services.db import get_user_by_email, insert_user
+from .db import get_user_by_email, insert_user
 import os
 from dotenv import load_dotenv
 
