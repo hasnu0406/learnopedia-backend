@@ -33,7 +33,7 @@ Be warm, specific, and encouraging. Use clear headings and bullet points.
             "Content-Type": "application/json"
         }
         payload = {
-            "model": "mixtral-8x7b-32768",
+            "model": "groq/compound",
             "messages": [{"role": "user", "content": prompt}],
             "max_tokens": 1500
         }
