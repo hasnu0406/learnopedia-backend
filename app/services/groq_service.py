@@ -33,7 +33,7 @@ Be warm, specific, and encouraging. Use clear headings and bullet points.
             "Content-Type": "application/json"
         }
         payload = {
-            "model": "groq/compound",
+            "model": "llama-3.1-8b-instant",
             "messages": [{"role": "user", "content": prompt}],
             "max_tokens": 1500
         }
