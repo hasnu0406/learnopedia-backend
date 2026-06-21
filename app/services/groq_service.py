@@ -4,11 +4,11 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-OPENROUTER_API_KEY = os.getenv("OPENROUTER_API_KEY")
-if not OPENROUTER_API_KEY:
-    raise ValueError("OPENROUTER_API_KEY is missing from environment variables!")
+GROQ_API_KEY = os.getenv("GROQ_API_KEY")
+if not GROQ_API_KEY:
+    raise ValueError("GROQ_API_KEY is missing from environment variables!")
 
-OPENROUTER_API_URL = "https://openrouter.ai/api/v1/chat/completions"
+GROQ_API_URL = "https://api.groq.com/openai/v1/chat/completions"
 
 def get_recommendations(interests: list, skills: list, goals: list) -> str:
     prompt = f"""
@@ -29,15 +29,15 @@ Be warm, specific, and encouraging. Use clear headings and bullet points.
 """
     try:
         headers = {
-            "Authorization": f"Bearer {OPENROUTER_API_KEY}",
+            "Authorization": f"Bearer {GROQ_API_KEY}",
             "Content-Type": "application/json"
         }
         payload = {
-            "model": "meta-llama/llama-3-70b-instruct",
+            "model": "mixtral-8x7b-32768",
             "messages": [{"role": "user", "content": prompt}],
             "max_tokens": 1500
         }
-        response = requests.post(OPENROUTER_API_URL, json=payload, headers=headers)
+        response = requests.post(GROQ_API_URL, json=payload, headers=headers)
         response.raise_for_status()
         return response.json()["choices"][0]["message"]["content"]
     except Exception as e:
